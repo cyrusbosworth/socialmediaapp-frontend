@@ -33,7 +33,14 @@ const styles = {
 };
 
 export class Bug extends Component {
-	handleOpen = () => {};
+	state = {
+		openDialog: false
+	};
+	handleOpen = () => {
+		this.setState({
+			openDialog: true
+		});
+	};
 	render() {
 		const {
 			classes,
@@ -72,7 +79,7 @@ export class Bug extends Component {
 						<ChatIcon color="primary" />
 					</TooltipButton>
 					<span>{commentCount} comments</span>
-					<BugDialog bugId={bugId} userHandle={userHandle} openDialog={this.props.openDialog} />
+					<BugDialog bugId={bugId} userHandle={userHandle} openDialog={this.state.openDialog} />
 				</CardContent>
 			</Card>
 		);

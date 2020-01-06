@@ -31,7 +31,7 @@ const ProfileSkeleton = props => {
 					<hr />
 					<LocationOn color="primary" /> <span>Location</span>
 					<hr />
-					<LinkIcon color="primary/" />
+					<LinkIcon color="primary" />
 					<hr />
 					<CalendarToday color="primary" /> Joined date
 				</div>

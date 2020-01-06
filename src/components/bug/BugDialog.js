@@ -87,6 +87,7 @@ class BugDialog extends Component {
 			this.handleOpen();
 		}
 	}
+
 	render() {
 		const {
 			classes,
@@ -141,7 +142,6 @@ class BugDialog extends Component {
 					<TooltipButton tip="Close" onClick={this.handleClose} tipClassName={classes.closeButton}>
 						<CloseIcon />
 					</TooltipButton>
-
 					<DialogContent className={classes.dialogContent}>{dialogMarkup}</DialogContent>
 				</Dialog>
 			</Fragment>
