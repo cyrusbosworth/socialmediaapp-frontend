@@ -17,7 +17,7 @@ import TooltipButton from '../../util/TooltipButton';
 const styles = {
 	deleteButton: {
 		left: '90%',
-		top: '10%',
+		top: 15,
 		position: 'absolute'
 	}
 };

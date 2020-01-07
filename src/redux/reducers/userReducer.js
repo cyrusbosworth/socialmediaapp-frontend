@@ -3,8 +3,8 @@ import {
 	SET_AUTHENTICATED,
 	SET_UNAUTHENTICATED,
 	LOADING_USER,
-	LIKE_BUG,
-	UNLIKE_BUG,
+	FOLLOW_BUG,
+	UNFOLLOW_BUG,
 	MARK_NOTIFICATIONS_READ
 } from '../types';
 
@@ -12,7 +12,7 @@ const initialState = {
 	authenticated: false,
 	loading: false,
 	credentials: {},
-	likes: [],
+	follows: [],
 	notifications: []
 };
 
@@ -37,21 +37,21 @@ export default function(state = initialState, action) {
 				loading: true
 			};
 
-		case LIKE_BUG:
+		case FOLLOW_BUG:
 			return {
 				...state,
-				likes: [
-					...state.likes,
+				follows: [
+					...state.follows,
 					{
 						userHandle: state.credentials.handle,
 						bugId: action.payload.bugId
 					}
 				]
 			};
-		case UNLIKE_BUG:
+		case UNFOLLOW_BUG:
 			return {
 				...state,
-				likes: state.likes.filter(like => like.bugId !== action.payload.bugId)
+				follows: state.follows.filter(follow => follow.bugId !== action.payload.bugId)
 			};
 		case MARK_NOTIFICATIONS_READ:
 			state.notifications.forEach(note => (note.read = true));

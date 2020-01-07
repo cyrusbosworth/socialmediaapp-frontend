@@ -12,11 +12,11 @@ import { Card, CardContent, CardMedia } from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
 
 import { connect } from 'react-redux';
-import { likeBug, unlikeBug } from '../../redux/actions/dataActions';
+import { followBug, unfollowBug } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
 import DeleteBug from './DeleteBug';
 import BugDialog from './BugDialog';
-import LikeButton from './LikeButton';
+import FollowButton from './FollowButton';
 
 const styles = {
 	card: {
@@ -28,7 +28,8 @@ const styles = {
 		minWidth: 200
 	},
 	content: {
-		padding: 25
+		padding: 25,
+		width: '100%'
 	}
 };
 
@@ -44,12 +45,14 @@ export class Bug extends Component {
 	render() {
 		const {
 			classes,
-			bug: { body, createdAt, userImage, userHandle, commentCount, likeCount, bugId },
+			bug: { body, createdAt, userImage, userHandle, commentCount, followCount, bugId, title },
 			user: {
 				authenticated,
 				credentials: { handle }
 			}
 		} = this.props;
+
+		const bodyFit = body.length > 250 ? body.substr(0, 250) + '...' : body;
 
 		dayjs.extend(relativeTime);
 
@@ -57,24 +60,27 @@ export class Bug extends Component {
 
 		const deleteButton =
 			authenticated && userHandle === handle ? <DeleteBug bugId={bugId}></DeleteBug> : null;
-		const likes = likeCount === 1 ? 'like' : 'likes';
+
 		return (
 			<Card className={classes.card}>
 				<CardMedia image={userImage} title="Profile image" className={classes.image} />
 				<CardContent className={classes.content}>
 					<Typography variant="h5" color="secondary" component={Link} to={`/users/${userHandle}`}>
+						{title && title.length > 40 ? title.substr(0, 40) + '...' : title}
+					</Typography>
+					<hr style={{ width: '100%' }} />
+					{deleteButton}
+					<Typography variant="h6" color="primary" component={Link} to={`/users/${userHandle}`}>
 						{userHandle}
 					</Typography>
-					{deleteButton}
+
 					<Typography variant="body2" color="textSecondary">
 						{dayjs(createdAt).fromNow()}
 					</Typography>
 
-					<Typography variant="body1">{body}</Typography>
-					<LikeButton bugId={bugId} />
-					<span>
-						{likeCount} {likes}
-					</span>
+					<Typography variant="body1">{bodyFit}</Typography>
+					<FollowButton bugId={bugId} />
+					<span>{followCount} following</span>
 					<TooltipButton tip="comments" onClick={this.handleOpen}>
 						<ChatIcon color="primary" />
 					</TooltipButton>
@@ -89,8 +95,8 @@ export class Bug extends Component {
 Bug.propTypes = {
 	classes: PropTypes.object.isRequired,
 	user: PropTypes.object.isRequired,
-	likeBug: PropTypes.func.isRequired,
-	unlikeBug: PropTypes.func.isRequired,
+	followBug: PropTypes.func.isRequired,
+	unfollowBug: PropTypes.func.isRequired,
 	bug: PropTypes.object.isRequired,
 	openDialog: PropTypes.bool
 };
@@ -100,8 +106,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-	likeBug,
-	unlikeBug
+	followBug,
+	unfollowBug
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Bug));

@@ -1,7 +1,7 @@
 import {
 	SET_BUGS,
-	LIKE_BUG,
-	UNLIKE_BUG,
+	FOLLOW_BUG,
+	UNFOLLOW_BUG,
 	LOADING_DATA,
 	DELETE_BUG,
 	POST_BUG,
@@ -35,8 +35,8 @@ export default function(state = initialState, action) {
 				bug: action.payload
 			};
 		}
-		case LIKE_BUG:
-		case UNLIKE_BUG:
+		case FOLLOW_BUG:
+		case UNFOLLOW_BUG:
 			index = state.bugs.findIndex(bug => bug.bugId === action.payload.bugId);
 			state.bugs[index] = action.payload;
 			if (state.bug.bugId === action.payload.bugId) {

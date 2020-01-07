@@ -64,11 +64,11 @@ export class Notifications extends Component {
 		let notificationsMarkup =
 			notifications && notifications.length > 0 ? (
 				notifications.map(note => {
-					const verb = note.type === 'like' ? 'liked' : 'commented on';
+					const verb = note.type === 'follow' ? 'followd' : 'commented on';
 					const time = dayjs(note.createdAt).fromNow();
 					const iconColor = note.read ? 'primary' : 'secondary';
 					const icon =
-						note.type === 'like' ? (
+						note.type === 'follow' ? (
 							<FavoriteIcon color={iconColor} style={{ marginRight: 10 }} />
 						) : (
 							<ChatIcon color={iconColor} style={{ marginRight: 10 }} />

@@ -1,8 +1,8 @@
 import {
 	SET_BUGS,
 	LOADING_DATA,
-	LIKE_BUG,
-	UNLIKE_BUG,
+	FOLLOW_BUG,
+	UNFOLLOW_BUG,
 	DELETE_BUG,
 	SET_ERRORS,
 	POST_BUG,
@@ -46,27 +46,27 @@ export const getBug = bugId => dispatch => {
 		})
 		.catch(err => console.log(err));
 };
-//Like a bug
+//Follow a bug
 
-export const likeBug = bugId => dispatch => {
+export const followBug = bugId => dispatch => {
 	axios
-		.get(`/bug/${bugId}/like`)
+		.get(`/bug/${bugId}/follow`)
 		.then(res => {
 			dispatch({
-				type: LIKE_BUG,
+				type: FOLLOW_BUG,
 				payload: res.data
 			});
 		})
 		.catch(err => console.log(err));
 };
-//Unlike a bug
+//Unfollow a bug
 
-export const unlikeBug = bugId => dispatch => {
+export const unfollowBug = bugId => dispatch => {
 	axios
-		.get(`/bug/${bugId}/unlike`)
+		.get(`/bug/${bugId}/unfollow`)
 		.then(res => {
 			dispatch({
-				type: UNLIKE_BUG,
+				type: UNFOLLOW_BUG,
 				payload: res.data
 			});
 		})

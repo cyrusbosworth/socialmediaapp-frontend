@@ -17,8 +17,8 @@ export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 
 export const SET_BUGS = 'SET_BUGS';
 export const SET_BUG = 'SET_BUG';
-export const LIKE_BUG = 'LIKE_BUG';
-export const UNLIKE_BUG = 'UNLIKE_BUG';
+export const FOLLOW_BUG = 'FOLLOW_BUG';
+export const UNFOLLOW_BUG = 'UNFOLLOW_BUG';
 export const DELETE_BUG = 'DELETE_BUG';
 export const POST_BUG = 'POST_BUG';
 

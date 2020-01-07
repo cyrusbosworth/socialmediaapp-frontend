@@ -24,7 +24,7 @@ import UnfoldIcon from '@material-ui/icons/UnfoldMore';
 import { connect } from 'react-redux';
 import { getBug, clearErrors } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
-import LikeButton from './LikeButton';
+import FollowButton from './FollowButton';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
 
@@ -38,7 +38,7 @@ const styles = theme => ({
 		objectFit: 'cover'
 	},
 	dialogContent: {
-		padding: 25
+		padding: '15px 25px'
 	},
 	closeButton: {
 		position: 'absolute',
@@ -91,7 +91,17 @@ class BugDialog extends Component {
 	render() {
 		const {
 			classes,
-			bug: { bugId, body, createdAt, likeCount, commentCount, userImage, userHandle, comments },
+			bug: {
+				bugId,
+				body,
+				createdAt,
+				followCount,
+				commentCount,
+				userImage,
+				userHandle,
+				comments,
+				title
+			},
 			UI: { loading }
 		} = this.props;
 
@@ -101,12 +111,15 @@ class BugDialog extends Component {
 			</div>
 		) : (
 			<Grid container spacing={1}>
-				<Grid item sm={5}>
+				<Grid item sm={5} style={{ textAlign: 'center' }}>
 					<img src={userImage} alt="Profile" className={classes.profileImage} />
-				</Grid>
-				<Grid item sm={7}>
 					<Typography component={Link} color="primary" variant="h5" to={`/users/${userHandle}`}>
 						@{userHandle}
+					</Typography>
+				</Grid>
+				<Grid item sm={7}>
+					<Typography color="secondary" variant="h5">
+						{title}
 					</Typography>
 					<hr className={classes.invisSeparator} />
 					<Typography color="primary" variant="body2">
@@ -116,8 +129,8 @@ class BugDialog extends Component {
 					<Typography color="primary" variant="body1">
 						{body}
 					</Typography>
-					<LikeButton bugId={bugId} />
-					<span>{likeCount} likes</span>
+					<FollowButton bugId={bugId} />
+					<span>{followCount} follows</span>
 					<TooltipButton tip="comments">
 						<ChatIcon color="primary" />
 					</TooltipButton>

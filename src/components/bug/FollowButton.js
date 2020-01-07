@@ -8,51 +8,51 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { connect } from 'react-redux';
-import { likeBug, unlikeBug } from '../../redux/actions/dataActions';
+import { followBug, unfollowBug } from '../../redux/actions/dataActions';
 
-export class LikeButton extends Component {
-	likedBug = () => {
+export class FollowButton extends Component {
+	followdBug = () => {
 		if (
-			this.props.user.likes &&
-			this.props.user.likes.find(like => like.bugId === this.props.bugId)
+			this.props.user.follows &&
+			this.props.user.follows.find(follow => follow.bugId === this.props.bugId)
 		)
 			return true;
 		else return false;
 	};
 
-	likeBug = () => {
-		this.props.likeBug(this.props.bugId);
+	followBug = () => {
+		this.props.followBug(this.props.bugId);
 	};
 
-	unlikeBug = () => {
-		this.props.unlikeBug(this.props.bugId);
+	unfollowBug = () => {
+		this.props.unfollowBug(this.props.bugId);
 	};
 	render() {
 		const { authenticated } = this.props.user;
-		const likeButton = !authenticated ? (
+		const followButton = !authenticated ? (
 			<Link to="/login">
-				<TooltipButton tip="Like">
+				<TooltipButton tip="Follow">
 					<FavoriteBorder color="primary" />
 				</TooltipButton>
 			</Link>
-		) : this.likedBug() ? (
-			<TooltipButton tip="Unlike" onClick={this.unlikeBug}>
+		) : this.followdBug() ? (
+			<TooltipButton tip="Unfollow" onClick={this.unfollowBug}>
 				<FavoriteIcon color="primary" />
 			</TooltipButton>
 		) : (
-			<TooltipButton tip="Like" onClick={this.likeBug}>
+			<TooltipButton tip="Follow" onClick={this.followBug}>
 				<FavoriteBorder color="primary" />
 			</TooltipButton>
 		);
 
-		return likeButton;
+		return followButton;
 	}
 }
 
-LikeButton.propTypes = {
+FollowButton.propTypes = {
 	user: PropTypes.object.isRequired,
-	likeBug: PropTypes.func.isRequired,
-	unlikeBug: PropTypes.func.isRequired,
+	followBug: PropTypes.func.isRequired,
+	unfollowBug: PropTypes.func.isRequired,
 	bugId: PropTypes.string.isRequired
 };
 
@@ -61,8 +61,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-	likeBug,
-	unlikeBug
+	followBug,
+	unfollowBug
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(LikeButton);
+export default connect(mapStateToProps, mapActionsToProps)(FollowButton);

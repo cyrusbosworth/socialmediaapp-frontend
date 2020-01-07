@@ -74,8 +74,8 @@ Comments.propTypes = {
 // });
 
 // const mapActionsToProps = {
-// 	likeBug,
-// 	unlikeBug
+// 	followBug,
+// 	unfollowBug
 // };
 
 export default withStyles(styles)(Comments);
