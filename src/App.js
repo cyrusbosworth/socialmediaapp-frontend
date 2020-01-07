@@ -23,8 +23,6 @@ import axios from 'axios';
 
 const theme = createMuiTheme(themeFile);
 
-//TODO infinite login loop refresh jwt token #17
-
 const token = localStorage.FBIdToken;
 if (token) {
 	const decodedToken = jwtDecode(token);

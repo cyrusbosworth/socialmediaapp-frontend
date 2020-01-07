@@ -24,9 +24,7 @@ const styles = {
 		display: 'flex',
 		marginBottom: 20
 	},
-	image: {
-		minWidth: 200
-	},
+	image: { minWidth: 200 },
 	content: {
 		padding: 25,
 		width: '100%'
@@ -42,6 +40,7 @@ export class Bug extends Component {
 			openDialog: true
 		});
 	};
+
 	render() {
 		const {
 			classes,
@@ -55,8 +54,6 @@ export class Bug extends Component {
 		const bodyFit = body.length > 250 ? body.substr(0, 250) + '...' : body;
 
 		dayjs.extend(relativeTime);
-
-		//TODO max body size certain amount of characters and ellipses
 
 		const deleteButton =
 			authenticated && userHandle === handle ? <DeleteBug bugId={bugId}></DeleteBug> : null;

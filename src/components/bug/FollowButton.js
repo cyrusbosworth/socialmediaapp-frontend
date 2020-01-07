@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom/';
 
 import PropTypes from 'prop-types';
 
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import StarBorder from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 
 import { connect } from 'react-redux';
 import { followBug, unfollowBug } from '../../redux/actions/dataActions';
@@ -32,16 +32,16 @@ export class FollowButton extends Component {
 		const followButton = !authenticated ? (
 			<Link to="/login">
 				<TooltipButton tip="Follow">
-					<FavoriteBorder color="primary" />
+					<StarBorder color="primary" />
 				</TooltipButton>
 			</Link>
 		) : this.followdBug() ? (
 			<TooltipButton tip="Unfollow" onClick={this.unfollowBug}>
-				<FavoriteIcon color="primary" />
+				<StarIcon color="primary" />
 			</TooltipButton>
 		) : (
 			<TooltipButton tip="Follow" onClick={this.followBug}>
-				<FavoriteBorder color="primary" />
+				<StarBorder color="primary" />
 			</TooltipButton>
 		);
 

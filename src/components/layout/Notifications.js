@@ -18,6 +18,10 @@ import { connect } from 'react-redux';
 import { markNotificationsRead } from '../../redux/actions/userActions';
 
 export class Notifications extends Component {
+	constructor(props) {
+		super(props);
+		dayjs.extend(relativeTime);
+	}
 	state = {
 		anchorEl: null
 	};
@@ -42,11 +46,10 @@ export class Notifications extends Component {
 	};
 
 	render() {
-		//TODO can i put this somewhere else
-		dayjs.extend(relativeTime);
 		const notifications = this.props.notifications;
 		const anchorEl = this.state.anchorEl;
-		//TODO this is messy
+
+		//This creates the badge on the icon if there are new notifications
 		let notificationsIcon;
 		if (notifications && notifications.length > 0) {
 			let unread = notifications.filter(note => note.read === false).length;
@@ -64,7 +67,7 @@ export class Notifications extends Component {
 		let notificationsMarkup =
 			notifications && notifications.length > 0 ? (
 				notifications.map(note => {
-					const verb = note.type === 'follow' ? 'followd' : 'commented on';
+					const verb = note.type === 'follow' ? 'followed' : 'commented on';
 					const time = dayjs(note.createdAt).fromNow();
 					const iconColor = note.read ? 'primary' : 'secondary';
 					const icon =

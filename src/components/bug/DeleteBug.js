@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import { deleteBug } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
 
-//TODO fix positioning
 const styles = {
 	deleteButton: {
 		left: '90%',

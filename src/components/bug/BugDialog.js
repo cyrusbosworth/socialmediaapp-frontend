@@ -130,7 +130,7 @@ class BugDialog extends Component {
 						{body}
 					</Typography>
 					<FollowButton bugId={bugId} />
-					<span>{followCount} follows</span>
+					<span>{followCount} following</span>
 					<TooltipButton tip="comments">
 						<ChatIcon color="primary" />
 					</TooltipButton>

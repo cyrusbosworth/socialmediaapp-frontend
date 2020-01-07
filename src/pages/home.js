@@ -22,7 +22,7 @@ export class home extends Component {
 			<BugSkeleton />
 		);
 		return (
-			<Grid container spacing={10}>
+			<Grid container spacing={5}>
 				<Grid item sm={8} xs={12}>
 					{recentBugsMarkUp}
 				</Grid>

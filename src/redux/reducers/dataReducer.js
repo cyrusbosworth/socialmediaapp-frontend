@@ -57,10 +57,12 @@ export default function(state = initialState, action) {
 				bugs: [action.payload, ...state.bugs]
 			};
 		case SUBMIT_COMMENT:
+			let commentCount = state.bug.commentCount + 1;
 			return {
 				...state,
 				bug: {
 					...state.bug,
+					commentCount,
 					comments: [action.payload, ...state.bug.comments]
 				}
 			};
