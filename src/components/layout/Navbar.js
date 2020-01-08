@@ -13,6 +13,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import NotifIcon from '@material-ui/icons/Notifications';
 import { connect } from 'react-redux';
 
+//TODO ADD TOOLTIPS
 export class Navbar extends Component {
 	render() {
 		const { authenticated } = this.props;
@@ -29,9 +30,6 @@ export class Navbar extends Component {
 								</TooltipButton>
 							</Link>
 
-							{/* <TooltipButton tip="Notifications">
-								<NotifIcon color="primary" />
-							</TooltipButton> */}
 							<Notifications></Notifications>
 						</Fragment>
 					) : (

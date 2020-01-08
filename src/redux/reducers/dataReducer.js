@@ -38,10 +38,13 @@ export default function(state = initialState, action) {
 		case FOLLOW_BUG:
 		case UNFOLLOW_BUG:
 			index = state.bugs.findIndex(bug => bug.bugId === action.payload.bugId);
+
 			state.bugs[index] = action.payload;
+
 			if (state.bug.bugId === action.payload.bugId) {
 				state.bug = action.payload;
 			}
+
 			return {
 				...state
 			};
@@ -57,15 +60,26 @@ export default function(state = initialState, action) {
 				bugs: [action.payload, ...state.bugs]
 			};
 		case SUBMIT_COMMENT:
-			let commentCount = state.bug.commentCount + 1;
+			index = state.bugs.findIndex(bug => bug.bugId === action.payload.bugId);
+			console.log(index);
+			const newBug = !state.bug.bugId ? state.bugs[index] : state.bug;
+			console.log('State.bug', state.bug);
+			console.log('newbug', newBug);
+
+			newBug.commentCount = newBug.commentCount + 1;
+
+			state.bug = newBug;
+			state.bugs[index] = newBug;
+
+			console.log(state.bug);
 			return {
 				...state,
 				bug: {
 					...state.bug,
-					commentCount,
 					comments: [action.payload, ...state.bug.comments]
 				}
 			};
+
 		default:
 			return state;
 	}

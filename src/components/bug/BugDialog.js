@@ -130,11 +130,10 @@ class BugDialog extends Component {
 						{body}
 					</Typography>
 					<FollowButton bugId={bugId} />
+					{/* TODO style the counts with typography */}
 					<span>{followCount} following</span>
-					<TooltipButton tip="comments">
-						<ChatIcon color="primary" />
-					</TooltipButton>
-					<span>{commentCount} comments</span>
+
+					<span> {commentCount} comments</span>
 				</Grid>
 				{commentCount > 0 && <hr className={classes.visSeparator}></hr>}
 				<CommentForm bugId={bugId} />

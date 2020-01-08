@@ -16,7 +16,8 @@ const styles = theme => ({
 class CommentForm extends Component {
 	state = {
 		body: '',
-		errors: {}
+		errors: {},
+		submitted: false
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -33,6 +34,8 @@ class CommentForm extends Component {
 	handleSubmit = event => {
 		event.preventDefault();
 		this.props.submitComment(this.props.bugId, { body: this.state.body });
+		this.setState({ submitted: true });
+		if (this.props.onSubmit) this.props.onSubmit();
 	};
 	render() {
 		const { classes, authenticated } = this.props;

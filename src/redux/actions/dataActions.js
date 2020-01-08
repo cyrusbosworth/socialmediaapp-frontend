@@ -64,6 +64,7 @@ export const followBug = bugId => dispatch => {
 export const unfollowBug = bugId => dispatch => {
 	axios
 		.get(`/bug/${bugId}/unfollow`)
+
 		.then(res => {
 			dispatch({
 				type: UNFOLLOW_BUG,
@@ -115,7 +116,8 @@ export const submitComment = (bugId, commentData) => dispatch => {
 			dispatch(clearErrors());
 		})
 		.catch(err => {
-			dispatch({ type: SET_ERRORS, payload: err.response.data });
+			console.log(err);
+			//dispatch({ type: SET_ERRORS, payload: err.response.data });
 		});
 };
 

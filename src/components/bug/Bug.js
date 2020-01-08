@@ -17,7 +17,7 @@ import TooltipButton from '../../util/TooltipButton';
 import DeleteBug from './DeleteBug';
 import BugDialog from './BugDialog';
 import FollowButton from './FollowButton';
-
+import CommentDialog from './CommentDialog';
 const styles = {
 	card: {
 		position: 'relative',
@@ -78,9 +78,10 @@ export class Bug extends Component {
 					<Typography variant="body1">{bodyFit}</Typography>
 					<FollowButton bugId={bugId} />
 					<span>{followCount} following</span>
-					<TooltipButton tip="comments" onClick={this.handleOpen}>
+					{/* <TooltipButton tip="comments" onClick={this.handleOpen}>
 						<ChatIcon color="primary" />
-					</TooltipButton>
+					</TooltipButton> */}
+					<CommentDialog bugId={bugId}></CommentDialog>
 					<span>{commentCount} comments</span>
 					<BugDialog bugId={bugId} userHandle={userHandle} openDialog={this.state.openDialog} />
 				</CardContent>
