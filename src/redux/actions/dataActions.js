@@ -1,98 +1,98 @@
 import {
-	SET_BUGS,
+	SET_POSTS,
 	LOADING_DATA,
-	FOLLOW_BUG,
-	UNFOLLOW_BUG,
-	DELETE_BUG,
+	FOLLOW_POST,
+	UNFOLLOW_POST,
+	DELETE_POST,
 	SET_ERRORS,
-	POST_BUG,
+	POST_POST,
 	LOADING_UI,
 	CLEAR_ERRORS,
 	STOP_LOADING_UI,
-	SET_BUG,
+	SET_POST,
 	SUBMIT_COMMENT
 } from '../types';
 import axios from 'axios';
 
-//get all bugs
-export const getBugs = () => dispatch => {
+//get all posts
+export const getPosts = () => dispatch => {
 	dispatch({ type: LOADING_DATA });
 	axios
-		.get('/bugs')
+		.get('/posts')
 		.then(res => {
 			dispatch({
-				type: SET_BUGS,
+				type: SET_POSTS,
 				payload: res.data
 			});
 		})
 		.catch(err => {
 			dispatch({
-				type: SET_BUGS,
+				type: SET_POSTS,
 				payload: []
 			});
 		});
 };
-// get one bug detail
-export const getBug = bugId => dispatch => {
+// get one post detail
+export const getPost = postId => dispatch => {
 	dispatch({ type: LOADING_UI });
 	axios
-		.get(`/bug/${bugId}`)
+		.get(`/post/${postId}`)
 		.then(res => {
 			dispatch({
-				type: SET_BUG,
+				type: SET_POST,
 				payload: res.data
 			});
 			dispatch({ type: STOP_LOADING_UI });
 		})
 		.catch(err => console.log(err));
 };
-//Follow a bug
+//Follow a post
 
-export const followBug = bugId => dispatch => {
+export const followPost = postId => dispatch => {
 	axios
-		.get(`/bug/${bugId}/follow`)
+		.get(`/post/${postId}/follow`)
 		.then(res => {
 			dispatch({
-				type: FOLLOW_BUG,
+				type: FOLLOW_POST,
 				payload: res.data
 			});
 		})
 		.catch(err => console.log(err));
 };
-//Unfollow a bug
+//Unfollow a post
 
-export const unfollowBug = bugId => dispatch => {
+export const unfollowPost = postId => dispatch => {
 	axios
-		.get(`/bug/${bugId}/unfollow`)
+		.get(`/post/${postId}/unfollow`)
 
 		.then(res => {
 			dispatch({
-				type: UNFOLLOW_BUG,
+				type: UNFOLLOW_POST,
 				payload: res.data
 			});
 		})
 		.catch(err => console.log(err));
 };
 
-export const deleteBug = bugId => dispatch => {
+export const deletePost = postId => dispatch => {
 	axios
-		.delete(`/bug/${bugId}`)
+		.delete(`/post/${postId}`)
 		.then(() => {
 			dispatch({
-				type: DELETE_BUG,
-				payload: bugId
+				type: DELETE_POST,
+				payload: postId
 			});
 		})
 		.catch(err => console.log(err));
 };
 
-export const postBug = newBug => dispatch => {
+export const postPost = newPost => dispatch => {
 	dispatch({ type: LOADING_UI });
 	axios
-		.post('/bug', newBug)
+		.post('/post', newPost)
 		.then(res => {
 			dispatch({
-				type: POST_BUG,
+				type: POST_POST,
 				payload: res.data
 			});
 			dispatch(clearErrors());
@@ -105,9 +105,9 @@ export const postBug = newBug => dispatch => {
 		});
 };
 
-export const submitComment = (bugId, commentData) => dispatch => {
+export const submitComment = (postId, commentData) => dispatch => {
 	axios
-		.post(`/bug/${bugId}/comment`, commentData)
+		.post(`/post/${postId}/comment`, commentData)
 		.then(res => {
 			dispatch({
 				type: SUBMIT_COMMENT,
@@ -130,9 +130,9 @@ export const getUserData = userHandle => dispatch => {
 	axios
 		.get(`/user/${userHandle}`)
 		.then(res => {
-			dispatch({ type: SET_BUGS, payload: res.data.bugs });
+			dispatch({ type: SET_POSTS, payload: res.data.posts });
 		})
 		.catch(err => {
-			dispatch({ type: SET_BUGS, payload: null });
+			dispatch({ type: SET_POSTS, payload: null });
 		});
 };

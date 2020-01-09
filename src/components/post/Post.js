@@ -9,29 +9,44 @@ import PropTypes from 'prop-types';
 //MUI Stuff
 import { Card, CardContent, CardMedia } from '@material-ui/core';
 //Icons
-import ChatIcon from '@material-ui/icons/Chat';
 
 import { connect } from 'react-redux';
-import { followBug, unfollowBug } from '../../redux/actions/dataActions';
-import TooltipButton from '../../util/TooltipButton';
-import DeleteBug from './DeleteBug';
-import BugDialog from './BugDialog';
+import { followPost, unfollowPost } from '../../redux/actions/dataActions';
+
+import DeletePost from './DeletePost';
+import PostDialog from './PostDialog';
 import FollowButton from './FollowButton';
 import CommentDialog from './CommentDialog';
-const styles = {
+const styles = theme => ({
 	card: {
 		position: 'relative',
 		display: 'flex',
 		marginBottom: 20
 	},
-	image: { minWidth: 200 },
+	image: {
+		minWidth: 200,
+		maxWidth: 200,
+		maxHeight: 200,
+		borderRadius: '50%',
+		margin: '20px 5px 20px 20px',
+		[theme.breakpoints.down('xs')]: {
+			display: 'none'
+		},
+		[theme.breakpoints.down('sm')]: {
+			minWidth: 60,
+			maxWidth: 60,
+			maxHeight: 60,
+			borderRadius: '50%',
+			margin: '20px 0px 20px 20px'
+		}
+	},
 	content: {
 		padding: 25,
 		width: '100%'
 	}
-};
+});
 
-export class Bug extends Component {
+export class Post extends Component {
 	state = {
 		openDialog: false
 	};
@@ -44,7 +59,7 @@ export class Bug extends Component {
 	render() {
 		const {
 			classes,
-			bug: { body, createdAt, userImage, userHandle, commentCount, followCount, bugId, title },
+			post: { body, createdAt, userImage, userHandle, commentCount, followCount, postId, title },
 			user: {
 				authenticated,
 				credentials: { handle }
@@ -56,7 +71,7 @@ export class Bug extends Component {
 		dayjs.extend(relativeTime);
 
 		const deleteButton =
-			authenticated && userHandle === handle ? <DeleteBug bugId={bugId}></DeleteBug> : null;
+			authenticated && userHandle === handle ? <DeletePost postId={postId}></DeletePost> : null;
 
 		return (
 			<Card className={classes.card}>
@@ -76,26 +91,26 @@ export class Bug extends Component {
 					</Typography>
 
 					<Typography variant="body1">{bodyFit}</Typography>
-					<FollowButton bugId={bugId} />
+					<FollowButton postId={postId} />
 					<span>{followCount} following</span>
 					{/* <TooltipButton tip="comments" onClick={this.handleOpen}>
 						<ChatIcon color="primary" />
 					</TooltipButton> */}
-					<CommentDialog bugId={bugId}></CommentDialog>
+					<CommentDialog postId={postId}></CommentDialog>
 					<span>{commentCount} comments</span>
-					<BugDialog bugId={bugId} userHandle={userHandle} openDialog={this.state.openDialog} />
+					<PostDialog postId={postId} userHandle={userHandle} openDialog={this.state.openDialog} />
 				</CardContent>
 			</Card>
 		);
 	}
 }
 
-Bug.propTypes = {
+Post.propTypes = {
 	classes: PropTypes.object.isRequired,
 	user: PropTypes.object.isRequired,
-	followBug: PropTypes.func.isRequired,
-	unfollowBug: PropTypes.func.isRequired,
-	bug: PropTypes.object.isRequired,
+	followPost: PropTypes.func.isRequired,
+	unfollowPost: PropTypes.func.isRequired,
+	post: PropTypes.object.isRequired,
 	openDialog: PropTypes.bool
 };
 
@@ -104,8 +119,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-	followBug,
-	unfollowBug
+	followPost,
+	unfollowPost
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Bug));
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Post));

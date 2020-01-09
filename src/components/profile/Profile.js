@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 //MaterialIcons
 import LocationOn from '@material-ui/icons/LocationOn';
-import LinkIcon from '@material-ui/icons/Link';
+import EmailIcon from '@material-ui/icons/Email';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
@@ -87,7 +87,7 @@ export class Profile extends Component {
 							)}
 							{website && (
 								<Fragment>
-									<LinkIcon color="primary" />
+									<EmailIcon color="primary" />
 									<a href={website} target="_blank" rel="noopener noreferrer">
 										{' '}
 										{website}

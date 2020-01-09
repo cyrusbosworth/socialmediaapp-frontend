@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { connect } from 'react-redux';
-import { postBug, clearErrors } from '../../redux/actions/dataActions';
+import { postPost, clearErrors } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
 
 const styles = theme => ({
@@ -30,7 +30,7 @@ const styles = theme => ({
 		top: '6%'
 	}
 });
-class PostBug extends Component {
+class PostPost extends Component {
 	state = {
 		open: false,
 		body: '',
@@ -70,8 +70,8 @@ class PostBug extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		this.props.postBug({ body: this.state.body, title: this.state.title });
-		//this.props.getBugs();
+		this.props.postPost({ body: this.state.body, title: this.state.title });
+		//this.props.getPosts();
 	};
 
 	render() {
@@ -84,7 +84,7 @@ class PostBug extends Component {
 		return (
 			<Fragment>
 				<TooltipButton
-					tip="Post new Bug"
+					tip="Post new Post"
 					onClick={this.handleOpen}
 					btnClassName={classes.deleteButton}
 				>
@@ -94,7 +94,7 @@ class PostBug extends Component {
 					<TooltipButton tip="Close" onClick={this.handleClose} tipClassName={classes.closeButton}>
 						<CloseIcon />
 					</TooltipButton>
-					<DialogTitle>Post a new bug</DialogTitle>
+					<DialogTitle>Post a new post</DialogTitle>
 					<DialogContent>
 						<form onSubmit={this.handleSubmit}>
 							<TextField
@@ -113,7 +113,7 @@ class PostBug extends Component {
 							<TextField
 								name="body"
 								type="text"
-								label="bug"
+								label="post"
 								multiline
 								rows="3"
 								placeholder="Describe issue"
@@ -147,10 +147,10 @@ class PostBug extends Component {
 	}
 }
 
-PostBug.propTypes = {
+PostPost.propTypes = {
 	classes: PropTypes.object.isRequired,
 	UI: PropTypes.object.isRequired,
-	postBug: PropTypes.func.isRequired,
+	postPost: PropTypes.func.isRequired,
 	clearErrors: PropTypes.func.isRequired
 };
 
@@ -158,4 +158,4 @@ const mapStateToProps = state => ({
 	UI: state.UI
 });
 
-export default connect(mapStateToProps, { postBug, clearErrors })(withStyles(styles)(PostBug));
+export default connect(mapStateToProps, { postPost, clearErrors })(withStyles(styles)(PostPost));

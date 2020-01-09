@@ -23,6 +23,8 @@ import axios from 'axios';
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseURL = 'https://us-central1-tracker-131f0.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token) {
 	const decodedToken = jwtDecode(token);
@@ -48,7 +50,7 @@ function App() {
 							<AuthRoute exact path="/login" component={login} />
 							<AuthRoute exact path="/signup" component={signup} />
 							<Route exact path="/users/:handle" component={user} />
-							<Route exact path="/users/:handle/bug/:bugId" component={user} />
+							<Route exact path="/users/:handle/post/:postId" component={user} />
 						</Switch>
 					</div>
 				</Router>

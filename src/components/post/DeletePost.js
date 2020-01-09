@@ -10,7 +10,7 @@ import { Button, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 
 import { connect } from 'react-redux';
-import { deleteBug } from '../../redux/actions/dataActions';
+import { deletePost } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
 
 const styles = {
@@ -20,7 +20,7 @@ const styles = {
 		position: 'absolute'
 	}
 };
-class DeleteBug extends Component {
+class DeletePost extends Component {
 	state = {
 		open: false
 	};
@@ -32,8 +32,8 @@ class DeleteBug extends Component {
 		this.setState({ open: false });
 	};
 
-	deleteBug = () => {
-		this.props.deleteBug(this.props.bugId);
+	deletePost = () => {
+		this.props.deletePost(this.props.postId);
 		this.setState({ open: false });
 	};
 	render() {
@@ -41,7 +41,7 @@ class DeleteBug extends Component {
 		return (
 			<Fragment>
 				<TooltipButton
-					tip="Delete Bug"
+					tip="Delete Post"
 					onClick={this.handleOpen}
 					btnClassName={classes.deleteButton}
 				>
@@ -53,7 +53,7 @@ class DeleteBug extends Component {
 						<Button onClick={this.handleClose} color="primary">
 							Cancel
 						</Button>
-						<Button onClick={this.deleteBug} color="secondary">
+						<Button onClick={this.deletePost} color="secondary">
 							Delete
 						</Button>
 					</DialogActions>
@@ -63,12 +63,12 @@ class DeleteBug extends Component {
 	}
 }
 
-DeleteBug.propTypes = {
+DeletePost.propTypes = {
 	classes: PropTypes.object.isRequired,
 
-	deleteBug: PropTypes.func.isRequired,
+	deletePost: PropTypes.func.isRequired,
 
-	bugId: PropTypes.string.isRequired
+	postId: PropTypes.string.isRequired
 };
 
-export default connect(null, { deleteBug })(withStyles(styles)(DeleteBug));
+export default connect(null, { deletePost })(withStyles(styles)(DeletePost));

@@ -3,28 +3,28 @@ import { Grid } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getBugs } from '../redux/actions/dataActions';
+import { getPosts } from '../redux/actions/dataActions';
 
-import Bug from '../components/bug/Bug';
+import Post from '../components/post/Post';
 import Profile from '../components/profile/Profile';
-import BugSkeleton from '../util/BugSkeleton';
+import PostSkeleton from '../util/PostSkeleton';
 
 export class home extends Component {
 	componentDidMount() {
-		this.props.getBugs();
+		this.props.getPosts();
 	}
 
 	render() {
-		const { bugs, loading } = this.props.data;
-		let recentBugsMarkUp = !loading ? (
-			bugs.map(bug => <Bug key={bug.bugId} bug={bug} />)
+		const { posts, loading } = this.props.data;
+		let recentPostsMarkUp = !loading ? (
+			posts.map(post => <Post key={post.postId} post={post} />)
 		) : (
-			<BugSkeleton />
+			<PostSkeleton />
 		);
 		return (
 			<Grid container spacing={5}>
 				<Grid item sm={8} xs={12}>
-					{recentBugsMarkUp}
+					{recentPostsMarkUp}
 				</Grid>
 				<Grid item sm={4} xs={12}>
 					<Profile />
@@ -36,11 +36,11 @@ export class home extends Component {
 
 home.propTypes = {
 	data: PropTypes.object.isRequired,
-	getBugs: PropTypes.func.isRequired
+	getPosts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
 	data: state.data
 });
 
-export default connect(mapStateToProps, { getBugs })(home);
+export default connect(mapStateToProps, { getPosts })(home);

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import noImg from '../images/no-img.png';
 
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ const styles = theme => ({
 	...theme.globalStyles
 });
 
-const BugSkeleton = props => {
+const PostSkeleton = props => {
 	const { classes } = props;
 
 	const content = Array.from({ length: 5 }).map((item, index) => (
@@ -28,8 +28,8 @@ const BugSkeleton = props => {
 	return <Fragment>{content}</Fragment>;
 };
 
-BugSkeleton.propTypes = {
+PostSkeleton.propTypes = {
 	classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BugSkeleton);
+export default withStyles(styles)(PostSkeleton);

@@ -17,12 +17,11 @@ import {
 	Typography
 } from '@material-ui/core';
 
-import ChatIcon from '@material-ui/icons/Chat';
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldIcon from '@material-ui/icons/UnfoldMore';
 
 import { connect } from 'react-redux';
-import { getBug, clearErrors } from '../../redux/actions/dataActions';
+import { getPost, clearErrors } from '../../redux/actions/dataActions';
 import TooltipButton from '../../util/TooltipButton';
 import FollowButton from './FollowButton';
 import Comments from './Comments';
@@ -32,7 +31,7 @@ const styles = theme => ({
 	...theme.globalStyles,
 
 	profileImage: {
-		maxWidth: 200,
+		width: 200,
 		height: 200,
 		borderRadius: '50%',
 		objectFit: 'cover'
@@ -55,7 +54,7 @@ const styles = theme => ({
 	}
 });
 
-class BugDialog extends Component {
+class PostDialog extends Component {
 	state = {
 		open: false,
 		oldPath: '',
@@ -64,8 +63,8 @@ class BugDialog extends Component {
 
 	handleOpen = () => {
 		let oldPath = window.location.pathname;
-		const { userHandle, bugId } = this.props;
-		const newPath = `/users/${userHandle}/bug/${bugId}`;
+		const { userHandle, postId } = this.props;
+		const newPath = `/users/${userHandle}/post/${postId}`;
 
 		if (oldPath === newPath) oldPath = `users/${userHandle}`;
 
@@ -73,7 +72,7 @@ class BugDialog extends Component {
 
 		this.setState({ open: true, oldPath, newPath });
 
-		this.props.getBug(this.props.bugId);
+		this.props.getPost(this.props.postId);
 	};
 
 	handleClose = () => {
@@ -91,8 +90,8 @@ class BugDialog extends Component {
 	render() {
 		const {
 			classes,
-			bug: {
-				bugId,
+			post: {
+				postId,
 				body,
 				createdAt,
 				followCount,
@@ -129,14 +128,14 @@ class BugDialog extends Component {
 					<Typography color="primary" variant="body1">
 						{body}
 					</Typography>
-					<FollowButton bugId={bugId} />
+					<FollowButton postId={postId} />
 					{/* TODO style the counts with typography */}
-					<span>{followCount} following</span>
+					<span>{followCount} following and </span>
 
 					<span> {commentCount} comments</span>
 				</Grid>
 				{commentCount > 0 && <hr className={classes.visSeparator}></hr>}
-				<CommentForm bugId={bugId} />
+				<CommentForm postId={postId} />
 				<Comments comments={comments} />
 			</Grid>
 		);
@@ -161,24 +160,24 @@ class BugDialog extends Component {
 	}
 }
 
-BugDialog.propTypes = {
+PostDialog.propTypes = {
 	classes: PropTypes.object.isRequired,
 	UI: PropTypes.object.isRequired,
-	getBug: PropTypes.func.isRequired,
-	bugId: PropTypes.string.isRequired,
+	getPost: PropTypes.func.isRequired,
+	postId: PropTypes.string.isRequired,
 	userHandle: PropTypes.string.isRequired,
-	bug: PropTypes.object.isRequired,
+	post: PropTypes.object.isRequired,
 	clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-	bug: state.data.bug,
+	post: state.data.post,
 	UI: state.UI
 });
 
 const mapActionToProps = {
-	getBug,
+	getPost,
 	clearErrors
 };
 
-export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(BugDialog));
+export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(PostDialog));

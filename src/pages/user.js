@@ -9,9 +9,9 @@ import { connect } from 'react-redux';
 import { getUserData } from '../redux/actions/dataActions';
 
 //Components
-import Bug from '../components/bug/Bug';
+import Post from '../components/post/Post';
 import StaticProfile from '../components/profile/StaticProfile';
-import BugSkeleton from '../util/BugSkeleton';
+import PostSkeleton from '../util/PostSkeleton';
 import ProfileSkeleton from '../util/ProfileSkeleton';
 
 import axios from 'axios';
@@ -19,13 +19,13 @@ import axios from 'axios';
 class user extends Component {
 	state = {
 		profile: null,
-		bugIdParam: null
+		postIdParam: null
 	};
 	componentDidMount() {
 		const handle = this.props.match.params.handle;
-		const bugId = this.props.match.params.bugId;
+		const postId = this.props.match.params.postId;
 
-		if (bugId) this.setState({ bugIdParam: bugId });
+		if (postId) this.setState({ postIdParam: postId });
 		this.props.getUserData(handle);
 		axios
 			.get(`/user/${handle}`)
@@ -37,21 +37,21 @@ class user extends Component {
 			.catch(err => console.log(err));
 	}
 	render() {
-		const { bugs, loading } = this.props.data;
-		const { bugIdParam } = this.state;
+		const { posts, loading } = this.props.data;
+		const { postIdParam } = this.state;
 
-		let bugMarkup = loading ? (
-			<BugSkeleton />
-		) : bugs === null ? (
-			<p>No bugs submitted by this user</p>
-		) : !bugIdParam ? (
-			bugs.map(bug => <Bug key={bug.bugId} bug={bug} />)
+		let postMarkup = loading ? (
+			<PostSkeleton />
+		) : posts === null ? (
+			<p>No posts submitted by this user</p>
+		) : !postIdParam ? (
+			posts.map(post => <Post key={post.postId} post={post} />)
 		) : (
-			bugs.map(bug => {
-				if (bug.bugId !== bugIdParam) {
-					return <Bug key={bug.bugId} bug={bug} />;
+			posts.map(post => {
+				if (post.postId !== postIdParam) {
+					return <Post key={post.postId} post={post} />;
 				} else {
-					return <Bug key={bug.bugId} bug={bug} openDialog />;
+					return <Post key={post.postId} post={post} openDialog />;
 				}
 			})
 		);
@@ -59,7 +59,7 @@ class user extends Component {
 		return (
 			<Grid container spacing={10}>
 				<Grid item sm={8} xs={12}>
-					{bugMarkup}
+					{postMarkup}
 				</Grid>
 				<Grid item sm={4} xs={12}>
 					{this.state.profile === null ? (

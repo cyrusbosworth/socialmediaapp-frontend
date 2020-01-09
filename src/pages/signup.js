@@ -10,7 +10,7 @@ import {
 	CircularProgress
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import AppIcon from '../images/bugicon.svg';
+import AppIcon from '../images/posticon.svg';
 
 //Redux
 import { connect } from 'react-redux';

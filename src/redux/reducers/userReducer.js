@@ -3,8 +3,8 @@ import {
 	SET_AUTHENTICATED,
 	SET_UNAUTHENTICATED,
 	LOADING_USER,
-	FOLLOW_BUG,
-	UNFOLLOW_BUG,
+	FOLLOW_POST,
+	UNFOLLOW_POST,
 	MARK_NOTIFICATIONS_READ
 } from '../types';
 
@@ -37,21 +37,21 @@ export default function(state = initialState, action) {
 				loading: true
 			};
 
-		case FOLLOW_BUG:
+		case FOLLOW_POST:
 			return {
 				...state,
 				follows: [
 					...state.follows,
 					{
 						userHandle: state.credentials.handle,
-						bugId: action.payload.bugId
+						postId: action.payload.postId
 					}
 				]
 			};
-		case UNFOLLOW_BUG:
+		case UNFOLLOW_POST:
 			return {
 				...state,
-				follows: state.follows.filter(follow => follow.bugId !== action.payload.bugId)
+				follows: state.follows.filter(follow => follow.postId !== action.payload.postId)
 			};
 		case MARK_NOTIFICATIONS_READ:
 			state.notifications.forEach(note => (note.read = true));

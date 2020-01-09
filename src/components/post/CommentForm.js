@@ -33,7 +33,7 @@ class CommentForm extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		this.props.submitComment(this.props.bugId, { body: this.state.body });
+		this.props.submitComment(this.props.postId, { body: this.state.body });
 		this.setState({ submitted: true });
 		if (this.props.onSubmit) this.props.onSubmit();
 	};
@@ -59,7 +59,6 @@ class CommentForm extends Component {
 						Submit
 					</Button>
 				</form>
-				<hr className={classes.visSeparator} />
 			</Grid>
 		) : null;
 		return commentFormMarkup;
@@ -71,12 +70,12 @@ CommentForm.propTypes = {
 	UI: PropTypes.object.isRequired,
 	submitComment: PropTypes.func.isRequired,
 
-	bugId: PropTypes.string.isRequired,
+	postId: PropTypes.string.isRequired,
 	authenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-	bug: state.data.bug,
+	post: state.data.post,
 	authenticated: state.user.authenticated,
 	UI: state.UI
 });

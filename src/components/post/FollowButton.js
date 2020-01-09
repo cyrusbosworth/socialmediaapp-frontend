@@ -8,24 +8,24 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 
 import { connect } from 'react-redux';
-import { followBug, unfollowBug } from '../../redux/actions/dataActions';
+import { followPost, unfollowPost } from '../../redux/actions/dataActions';
 
 export class FollowButton extends Component {
-	followdBug = () => {
+	followdPost = () => {
 		if (
 			this.props.user.follows &&
-			this.props.user.follows.find(follow => follow.bugId === this.props.bugId)
+			this.props.user.follows.find(follow => follow.postId === this.props.postId)
 		)
 			return true;
 		else return false;
 	};
 
-	followBug = () => {
-		this.props.followBug(this.props.bugId);
+	followPost = () => {
+		this.props.followPost(this.props.postId);
 	};
 
-	unfollowBug = () => {
-		this.props.unfollowBug(this.props.bugId);
+	unfollowPost = () => {
+		this.props.unfollowPost(this.props.postId);
 	};
 	render() {
 		const { authenticated } = this.props.user;
@@ -35,12 +35,12 @@ export class FollowButton extends Component {
 					<StarBorder color="primary" />
 				</TooltipButton>
 			</Link>
-		) : this.followdBug() ? (
-			<TooltipButton tip="Unfollow" onClick={this.unfollowBug}>
+		) : this.followdPost() ? (
+			<TooltipButton tip="Unfollow" onClick={this.unfollowPost}>
 				<StarIcon color="primary" />
 			</TooltipButton>
 		) : (
-			<TooltipButton tip="Follow" onClick={this.followBug}>
+			<TooltipButton tip="Follow" onClick={this.followPost}>
 				<StarBorder color="primary" />
 			</TooltipButton>
 		);
@@ -51,9 +51,9 @@ export class FollowButton extends Component {
 
 FollowButton.propTypes = {
 	user: PropTypes.object.isRequired,
-	followBug: PropTypes.func.isRequired,
-	unfollowBug: PropTypes.func.isRequired,
-	bugId: PropTypes.string.isRequired
+	followPost: PropTypes.func.isRequired,
+	unfollowPost: PropTypes.func.isRequired,
+	postId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -61,8 +61,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-	followBug,
-	unfollowBug
+	followPost,
+	unfollowPost
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(FollowButton);

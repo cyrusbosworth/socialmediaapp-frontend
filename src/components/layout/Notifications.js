@@ -83,9 +83,9 @@ export class Notifications extends Component {
 							<Typography
 								component={Link}
 								variant="body1"
-								to={`/users/${note.recipient}/bug/${note.bugId}`}
+								to={`/users/${note.recipient}/post/${note.postId}`}
 							>
-								{note.sender} {verb} your bug {time}
+								{note.sender} {verb} your post {time}
 							</Typography>
 						</MenuItem>
 					);

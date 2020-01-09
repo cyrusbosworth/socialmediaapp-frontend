@@ -95,8 +95,8 @@ class EditDetails extends Component {
 							<TextField
 								name="website"
 								type="text"
-								label="Website"
-								placeholder="Your personal/professional website"
+								label="Email"
+								placeholder="Your Email"
 								className={classes.textField}
 								value={this.state.website}
 								onChange={this.handleChange}

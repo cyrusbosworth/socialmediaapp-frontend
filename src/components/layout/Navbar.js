@@ -3,14 +3,14 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom/';
 import PropTypes from 'prop-types';
 import TooltipButton from '../../util/TooltipButton';
-import PostBug from '../bug/PostBug';
+import PostPost from '../post/PostPost';
 
 import Notifications from './Notifications';
 //MUI stuff
 import { AppBar, Toolbar, Button } from '@material-ui/core/';
 
 import HomeIcon from '@material-ui/icons/Home';
-import NotifIcon from '@material-ui/icons/Notifications';
+
 import { connect } from 'react-redux';
 
 //TODO ADD TOOLTIPS
@@ -22,7 +22,7 @@ export class Navbar extends Component {
 				<Toolbar className="nav-container">
 					{authenticated ? (
 						<Fragment>
-							<PostBug></PostBug>
+							<PostPost></PostPost>
 
 							<Link to="/">
 								<TooltipButton tip="Home">

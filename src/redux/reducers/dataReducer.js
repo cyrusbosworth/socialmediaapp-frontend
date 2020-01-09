@@ -1,17 +1,17 @@
 import {
-	SET_BUGS,
-	FOLLOW_BUG,
-	UNFOLLOW_BUG,
+	SET_POSTS,
+	FOLLOW_POST,
+	UNFOLLOW_POST,
 	LOADING_DATA,
-	DELETE_BUG,
-	POST_BUG,
-	SET_BUG,
+	DELETE_POST,
+	POST_POST,
+	SET_POST,
 	SUBMIT_COMMENT
 } from '../types';
 
 const initialState = {
-	bugs: [],
-	bug: {},
+	posts: [],
+	post: {},
 	loading: false
 };
 
@@ -23,60 +23,60 @@ export default function(state = initialState, action) {
 				...state,
 				loading: true
 			};
-		case SET_BUGS:
+		case SET_POSTS:
 			return {
 				...state,
-				bugs: action.payload,
+				posts: action.payload,
 				loading: false
 			};
-		case SET_BUG: {
+		case SET_POST: {
 			return {
 				...state,
-				bug: action.payload
+				post: action.payload
 			};
 		}
-		case FOLLOW_BUG:
-		case UNFOLLOW_BUG:
-			index = state.bugs.findIndex(bug => bug.bugId === action.payload.bugId);
+		case FOLLOW_POST:
+		case UNFOLLOW_POST:
+			index = state.posts.findIndex(post => post.postId === action.payload.postId);
 
-			state.bugs[index] = action.payload;
+			state.posts[index] = action.payload;
 
-			if (state.bug.bugId === action.payload.bugId) {
-				state.bug = action.payload;
+			if (state.post.postId === action.payload.postId) {
+				state.post = action.payload;
 			}
 
 			return {
 				...state
 			};
-		case DELETE_BUG:
-			index = state.bugs.findIndex(bug => bug.bugId === action.payload);
-			state.bugs.splice(index, 1);
+		case DELETE_POST:
+			index = state.posts.findIndex(post => post.postId === action.payload);
+			state.posts.splice(index, 1);
 			return {
 				...state
 			};
-		case POST_BUG:
+		case POST_POST:
 			return {
 				...state,
-				bugs: [action.payload, ...state.bugs]
+				posts: [action.payload, ...state.posts]
 			};
 		case SUBMIT_COMMENT:
-			index = state.bugs.findIndex(bug => bug.bugId === action.payload.bugId);
+			index = state.posts.findIndex(post => post.postId === action.payload.postId);
 			console.log(index);
-			const newBug = !state.bug.bugId ? state.bugs[index] : state.bug;
-			console.log('State.bug', state.bug);
-			console.log('newbug', newBug);
+			const newPost = !state.post.postId ? state.posts[index] : state.post;
+			console.log('State.post', state.post);
+			console.log('newpost', newPost);
 
-			newBug.commentCount = newBug.commentCount + 1;
+			newPost.commentCount = newPost.commentCount + 1;
 
-			state.bug = newBug;
-			state.bugs[index] = newBug;
+			state.post = newPost;
+			state.posts[index] = newPost;
 
-			console.log(state.bug);
+			console.log(state.post);
 			return {
 				...state,
-				bug: {
-					...state.bug,
-					comments: [action.payload, ...state.bug.comments]
+				post: {
+					...state.post,
+					comments: [action.payload, ...state.post.comments]
 				}
 			};
 
