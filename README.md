@@ -16,6 +16,7 @@ The live test version doesnt require an actual email validation for sign-up, but
 * Backend Node with REST API for Users, posts, and comments written with Express
 * Data is stored in Firebase Firestore
 * Express app is exported to Firebase functions
+* Authentication and Authorization with Firebase API
 
 * Frontend React app 
 * SPA with React Router
