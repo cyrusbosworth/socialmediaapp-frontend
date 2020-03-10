@@ -4,7 +4,9 @@ This repo is for the front-end the back-end can be found [here](https://github.c
 
 [See it live](https://tracker-131f0.firebaseapp.com/)
 
-The live test version doesnt require an actual email validation for sign-up, but a default user account can be used with E-mail: default@default.com PW: 123456
+The live test version doesnt require an actual email validation for sign-up, but a default user account can be used:
+  
+  E-mail: default@default.com PW: 123456
 
 ### Overview
   This is a social media site that has simple test posting, commenting, and notifications.  Users have profiles with basic information and picture avatars.  Users can make posts, comment on posts, and follow posts.  Users will receive notifications on their posts, and followed posts. 
